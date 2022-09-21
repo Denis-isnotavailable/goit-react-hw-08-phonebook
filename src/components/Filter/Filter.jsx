@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { FilterStyled } from "components/Filter/Filter.styled";
 
 export class Filter extends Component {
@@ -22,4 +23,8 @@ export class Filter extends Component {
             </FilterStyled>
         );
     }
+}
+
+Filter.propType = {
+    onChange: PropTypes.func.isRequired,
 }

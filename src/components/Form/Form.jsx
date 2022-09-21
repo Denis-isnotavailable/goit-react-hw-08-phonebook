@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { FormStyled } from "components/Form/Form.styled";
 
 export class Form extends Component {
@@ -20,6 +21,14 @@ export class Form extends Component {
 
     reset() {
         this.setState({ name: "", number: "", });
+    }
+
+    handleMouseDown = e => {
+        e.currentTarget.style.backgroundColor = "#00bbff";
+    }
+
+    handleMouseUp = e => {
+        e.currentTarget.style.backgroundColor = "#e0e0e0";
     }
 
 
@@ -54,8 +63,12 @@ export class Form extends Component {
                     />
                 </label>
 
-                <button type="submit">Add contact</button>
+                <button type="submit" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>Add contact</button>
             </FormStyled>
         )
     }
+}
+
+Form.propType = {
+    onSubmit: PropTypes.func.isRequired,
 }
