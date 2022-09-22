@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import { Container } from "components/Container/Container";
-import { Form } from "components/Form/Form";
+import { ContactForm } from "components/ContactForm/ContactForm";
 import { Filter } from "components/Filter/Filter";
 import { ContactList } from "components/ContactList/ContactList";
 
@@ -49,7 +49,7 @@ export class App extends Component {
       <Container>
         <h1>Phonebook</h1>
 
-        <Form onSubmit={this.formSubmitHandler} />        
+        <ContactForm onSubmit={this.formSubmitHandler} />        
 
         <h2>Contacts</h2>
 
