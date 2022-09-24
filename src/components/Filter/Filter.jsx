@@ -5,8 +5,7 @@ import { FilterStyled } from "components/Filter/Filter.styled";
 export class Filter extends Component {
 
     handleChange = e => {
-        const { value } = e.target;
-        console.log(e.target.value);        
+        const { value } = e.target;        
         this.props.onFilterChange(value);
     };
 
