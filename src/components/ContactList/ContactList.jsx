@@ -10,20 +10,27 @@ export class ContactList extends Component {
         return (
             <ContactListStyled>
                 {this.props.contacts.map(({ id, name, number }) => {
-                    return name.toLowerCase().includes(this.props.filter.toLowerCase()) &&
-                     <ContactItem key={id} id={id} name={name} number={number} onDeleteContact={this.props.onDeleteContact} />;   
+                    return <ContactItem key={id}
+                        id={id}
+                        name={name}
+                        number={number}
+                        onDeleteContact={this.props.onDeleteContact}
+                        onMouseDown={this.props.onMouseDown}
+                        onMouseUp={this.props.onMouseUp} />;  
                 })}                
             </ContactListStyled>
         );
     }
 }
 
-ContactList.protoType = {
-    contacts: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
-    }),
-    filter: PropTypes.string.isRequired,
+ContactList.propTypes = {
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+    })),    
     onDeleteContact: PropTypes.func.isRequired,
+    onMouseDown: PropTypes.func.isRequired,
+    onMouseUp: PropTypes.func.isRequired,
 }

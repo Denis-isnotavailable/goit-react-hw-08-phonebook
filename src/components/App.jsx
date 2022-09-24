@@ -29,7 +29,7 @@ export class App extends Component {
     //   return { contacts: [...contacts, { id: contactId, name: name, number: number }] };
     // });
     
-    if (!contacts.some(contact => contact.name === name)) {
+    if (!contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       this.setState(prevState => ({ contacts: [...prevState.contacts, { id: contactId, name: name, number: number }] }));      
     } else {
       alert(`${name} is already in contacts`);
@@ -44,19 +44,34 @@ export class App extends Component {
     this.setState(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== contactId)}));    
   }
 
+  filteredContacts() {
+    const { contacts, filter } = this.state;
+
+    return contacts.filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()));
+  }
+
   render() {
     return (
       <Container>
         <h1>Phonebook</h1>
 
-        <ContactForm onSubmit={this.formSubmitHandler} />        
+        <ContactForm onSubmit={this.formSubmitHandler} onMouseDown={ handleMouseDown } onMouseUp={ handleMouseUp } />       
 
         <h2>Contacts</h2>
 
-        <Filter onChange={this.handleFilterChange} />
+        <Filter onFilterChange={this.handleFilterChange} filter={ this.state.filter } />
 
-        <ContactList contacts={ this.state.contacts } filter={ this.state.filter } onDeleteContact={this.deleteContact} />  
+        <ContactList contacts={ this.filteredContacts() } onDeleteContact={this.deleteContact} onMouseDown={ handleMouseDown } onMouseUp={ handleMouseUp } />
       </Container>
     );
   }  
 };
+
+
+const handleMouseDown = e => {
+    e.currentTarget.style.backgroundColor = "#00bbff";
+}
+
+const handleMouseUp = e => {
+    e.currentTarget.style.backgroundColor = "#e0e0e0";
+}

@@ -6,7 +6,8 @@ export class Filter extends Component {
 
     handleChange = e => {
         const { value } = e.target;
-        this.props.onChange(value);        
+        console.log(e.target.value);        
+        this.props.onFilterChange(value);
     };
 
     render() {
@@ -16,6 +17,7 @@ export class Filter extends Component {
                 <input
                     type="text"
                     name="filter"
+                    value={this.props.filter}
                     onChange={this.handleChange}
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"              
@@ -25,6 +27,7 @@ export class Filter extends Component {
     }
 }
 
-Filter.propType = {
-    onChange: PropTypes.func.isRequired,
+Filter.propTypes = {
+    onFilterChange: PropTypes.func.isRequired,
+    filter: PropTypes.string.isRequired,
 }

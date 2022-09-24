@@ -4,29 +4,29 @@ import { ContactItemStyled } from "components/ContactItem/ContactItem.styled";
 
 export class ContactItem extends Component {
 
-    handleMouseDown = e => {
-        e.currentTarget.style.backgroundColor = "#00bbff";
-    }
-
-    handleMouseUp = e => {
-        e.currentTarget.style.backgroundColor = "#e0e0e0";
-    }
-
     render() {
         const { id, name, number, onDeleteContact} = this.props;
 
         return (
             <ContactItemStyled >
                 {name}: {number}
-                <button type="button" onClick={() => onDeleteContact(id)} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>Delete</button>
+                <button type="button"
+                    onClick={() => onDeleteContact(id)}
+                    onMouseDown={this.props.onMouseDown}
+                    onMouseUp={this.props.onMouseUp}
+                >
+                    Delete
+                </button>
             </ContactItemStyled>
         );
     }
 }
 
-ContactItem.propType = {
+ContactItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
     onDeleteContact: PropTypes.func.isRequired,
+    onMouseDown: PropTypes.func.isRequired,
+    onMouseUp: PropTypes.func.isRequired,
 }
