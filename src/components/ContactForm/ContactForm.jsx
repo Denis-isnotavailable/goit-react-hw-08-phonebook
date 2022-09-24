@@ -5,10 +5,15 @@ import * as Yup from "yup";
 import { FormStyled } from "components/ContactForm/Form.styled";
 
 export class ContactForm extends Component {
-    state = {    
+    // state = {    
+    //     name: "",
+    //     number: "",
+    // }
+
+    values = {    
         name: "",
         number: "",
-    }   
+    }
     
     handleSubmit = (values, { resetForm }) => {        
         this.props.onSubmit(values);
@@ -24,7 +29,7 @@ export class ContactForm extends Component {
     }
 
 
-    render() {
+    render() {        
         const namePattern = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
         const phonePattern = "\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}"
         const PhonebookValidationSchema = Yup.object().shape({
@@ -39,7 +44,7 @@ export class ContactForm extends Component {
         });
 
         return (
-            <Formik initialValues={this.state} onSubmit={this.handleSubmit} validationSchema={PhonebookValidationSchema}>
+            <Formik initialValues={this.values} onSubmit={this.handleSubmit} validationSchema={PhonebookValidationSchema}>
                 <FormStyled>
                     <label>
                         Name
