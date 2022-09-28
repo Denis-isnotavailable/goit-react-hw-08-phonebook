@@ -4,6 +4,10 @@ import { Container } from "components/Container/Container";
 import { ContactForm } from "components/ContactForm/ContactForm";
 import { Filter } from "components/Filter/Filter";
 import { ContactList } from "components/ContactList/ContactList";
+import { handleMouseDown, handleMouseUp } from "../utils/HandleMouse";
+
+
+const LOCAL_STORAGE = "myContacts";
 
 export class App extends Component {
 
@@ -15,19 +19,28 @@ export class App extends Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: "",
-  }  
+  }
+
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE));
+    
+    if (contacts) {
+      this.setState({ contacts: contacts });
+    }    
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem(LOCAL_STORAGE, JSON.stringify(contacts));
+    }
+  }
 
   formSubmitHandler = data => {    
     let contactId = nanoid();
     const { contacts } = this.state;
     const { name, number } = data;
-
-    // this.setState(({ contacts }) => {
-    //   if (contacts.some(contact => contact.name === name)) {
-    //     return alert(`${name} is already in contacts`);
-    //   } 
-    //   return { contacts: [...contacts, { id: contactId, name: name, number: number }] };
-    // });
     
     if (!contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       this.setState(prevState => ({ contacts: [...prevState.contacts, { id: contactId, name: name, number: number }] }));      
@@ -66,12 +79,3 @@ export class App extends Component {
     );
   }  
 };
-
-
-const handleMouseDown = e => {
-    e.currentTarget.style.backgroundColor = "#00bbff";
-}
-
-const handleMouseUp = e => {
-    e.currentTarget.style.backgroundColor = "#e0e0e0";
-}
