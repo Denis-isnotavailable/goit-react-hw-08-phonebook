@@ -1,29 +1,27 @@
-import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { FilterStyled } from "components/Filter/Filter.styled";
 
-export class Filter extends Component {
+export const Filter = ({ onFilterChange, filter }) => {
 
-    handleChange = e => {
-        const { value } = e.target;        
-        this.props.onFilterChange(value);
+    const handleChange = e => {
+        const { value } = e.target;
+        console.log(value);
+        onFilterChange(value);
     };
 
-    render() {
-        return (
+    return (
             <FilterStyled>
                 <p>Find contacts by name</p>
                 <input
                     type="text"
                     name="filter"
-                    value={this.props.filter}
-                    onChange={this.handleChange}
+                    value={filter}
+                    onChange={handleChange}
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"              
                 />
             </FilterStyled>
         );
-    }
 }
 
 Filter.propTypes = {

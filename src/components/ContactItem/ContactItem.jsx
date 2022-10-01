@@ -1,25 +1,20 @@
-import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { ContactItemStyled } from "components/ContactItem/ContactItem.styled";
 
-export class ContactItem extends Component {
+export const ContactItem = ({ id, name, number, onDeleteContact, onMouseDown, onMouseUp }) => {
 
-    render() {
-        const { id, name, number, onDeleteContact} = this.props;
-
-        return (
+    return (
             <ContactItemStyled >
                 {name}: {number}
                 <button type="button"
                     onClick={() => onDeleteContact(id)}
-                    onMouseDown={this.props.onMouseDown}
-                    onMouseUp={this.props.onMouseUp}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
                 >
                     Delete
                 </button>
             </ContactItemStyled>
         );
-    }
 }
 
 ContactItem.propTypes = {
