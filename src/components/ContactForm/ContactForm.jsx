@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import { FormStyled } from "components/ContactForm/Form.styled";
+import { handleMouseDown, handleMouseUp } from "../../utils/HandleMouse";
+
+import { useDispatch, useSelector } from "react-redux";
+import { selectContacts, selectError, selectOperation } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/operations';
 
 
 const values = {    
@@ -23,12 +28,26 @@ const PhonebookValidationSchema = Yup.object().shape({
 });
 
 
-export const ContactForm = ({ onSubmit, onMouseDown, onMouseUp }) => {
+export const ContactForm = () => {
+
+    const dispatch = useDispatch();
+    const contacts = useSelector(selectContacts);    
+    const operation = useSelector(selectOperation);
+    const error = useSelector(selectError);    
+
+    console.log(operation);
     
-    const handleSubmit = (values, { resetForm }) => {        
-        onSubmit(values);
-        resetForm();
-    }
+
+    const handleSubmit = (values, { resetForm }) => {
+        const { name } = values;
+
+        if (!contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {            
+            dispatch(addContact(values));         
+            !error && resetForm();          
+        } else {
+            alert(`${name} is already in contacts`);
+        }        
+    } 
 
     return (
             <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={PhonebookValidationSchema}>
@@ -51,7 +70,7 @@ export const ContactForm = ({ onSubmit, onMouseDown, onMouseUp }) => {
                         <ErrorMessage name="number" component="span" />
                     </label>
 
-                    <button type="submit" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>Add contact</button>
+                    <button type="submit" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>Add contact</button>
                 </FormStyled>
             </Formik>
             
@@ -59,8 +78,6 @@ export const ContactForm = ({ onSubmit, onMouseDown, onMouseUp }) => {
     }
 
 
-ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    onMouseDown: PropTypes.func.isRequired,
-    onMouseUp: PropTypes.func.isRequired,
-}
+// ContactForm.propTypes = {
+//     onSubmit: PropTypes.func.isRequired,
+// }
