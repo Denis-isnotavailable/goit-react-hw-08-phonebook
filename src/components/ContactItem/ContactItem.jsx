@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import GridLoader from "react-spinners/GridLoader";
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { AiFillPhone, AiFillDelete, AiFillSetting } from "react-icons/ai";
 import { BsFillPersonBadgeFill, BsFillPhoneFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,10 +22,13 @@ export const ContactItem = ({ id, name, number, openModal }) => {
         <ContactItemStyled >
             <PhoneButton
                 type='button'
-                onClick={() => Report.info(
+                onClick={() => Confirm.show(
                     'Outcoming call',
                     `call to: ${name.toUpperCase()} on: ${number} ??`,
                     'Okay',
+                    'No',
+                    () => { },
+                    () => { },
                 )} >
                 <AiFillPhone size={40} color="#70eb4a" /></PhoneButton>
             

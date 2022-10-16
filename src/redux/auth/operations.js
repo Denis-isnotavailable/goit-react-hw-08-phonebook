@@ -69,7 +69,7 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
     try {
         setAuthHeader(persistedToken);
         const response = await axios.get("/users/current");
-        Notify.success('REFRESH successfully');        
+        // Notify.success('REFRESH successfully');        
         return response.data;        
     } catch (e) {
         Notify.failure(e.message);
