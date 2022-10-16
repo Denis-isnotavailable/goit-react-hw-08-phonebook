@@ -1,7 +1,7 @@
 export const handleMouseDown = e => {
-    e.currentTarget.style.backgroundColor = "#00bbff";
+    e.currentTarget.style.backgroundColor = "#b43d4f";
 }
 
 export const handleMouseUp = e => {
-    e.currentTarget.style.backgroundColor = "#e0e0e0";
+    e.currentTarget.style.backgroundColor = "#524f50";
 }

@@ -1,15 +1,19 @@
 import { Field, Formik, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
-import { register } from "redux/auth/operations";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
+import { register } from "redux/auth/operations";
+import { selectIsAuthLoading } from "redux/auth/selectors";
 import { SignUpFormStyled } from "./SignUp.styled";
 
 
+
 const SignUp = () => {
-    const dispatch = useDispatch();     
+    const dispatch = useDispatch();
+    const isAuthLoading = useSelector(selectIsAuthLoading);
 
     const handleSubmit = (values, { resetForm }) => {        
-        console.log(values);
+        // console.log(values);
         dispatch(register(values));
         resetForm();
     }
@@ -43,7 +47,7 @@ const SignUp = () => {
                     <ErrorMessage name="password" component="span" />
                 </label>
 
-                <button type="submit">Sign Up</button>
+                <button type="submit"> { !isAuthLoading ? <ScaleLoader color="#ffffff" height={25} /> : <>Sign Up</> } </button>
             </SignUpFormStyled>
         </Formik>        
     )

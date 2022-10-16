@@ -1,14 +1,22 @@
 import { Field, Formik, ErrorMessage } from "formik";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { SignInFormStyled } from "./SignIn.styled";
 import { login } from "redux/auth/operations";
-import { selectIsRefreshing } from "redux/auth/selectors";
+import { selectIsAuthLoading, selectIsRefreshing } from "redux/auth/selectors";
+// import { SignInFormStyled } from "./SignIn.styled";
+
+import { SignUpFormStyled } from "components/SignUp/SignUp.styled";
+
+
 
 
 const SignIn = () => {
     const dispatch = useDispatch();
-    const isRefreshing = useSelector(selectIsRefreshing);
+    const isRefreshing = useSelector(selectIsRefreshing);    
+    const isAuthLoading = useSelector(selectIsAuthLoading); 
+
+    console.log(isAuthLoading);
     
     const handleSubmit = (values, { resetForm }) => {
        
@@ -21,7 +29,7 @@ const SignIn = () => {
         <>
             { !isRefreshing &&
             <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={SignInValidationSchema}>
-                <SignInFormStyled>
+                <SignUpFormStyled>
                     <label>
                         Email
                         <Field type="email" name="email" placeholder="Enter your email" />
@@ -34,8 +42,8 @@ const SignIn = () => {
                         <ErrorMessage name="password" component="span" />
                     </label>
 
-                    <button type="submit">Sign In</button>
-                </SignInFormStyled>
+                    <button type="submit"> { !isAuthLoading ? <ScaleLoader color="#ffffff" height={25} /> : <>Log In</> } </button>
+                </SignUpFormStyled>
             </Formik > }
         </>
         

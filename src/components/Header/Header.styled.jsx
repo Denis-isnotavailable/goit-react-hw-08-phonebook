@@ -21,22 +21,31 @@ export const HeaderStyled = styled.header`
     li {
         color: #acabab;
         font-size: 18px;
+        min-width: 110px;     
 
         :first-child {            
             margin-right: auto;
             font-size: 24px;
-            /* width: 100%; */
+            width: 100%;
         }
 
         :nth-child(2) {
             border-left: 2px solid #6c6767;
-            border-right: 2px solid #6c6767;
+            border-right: 2px solid #6c6767;            
         }
 
         :nth-child(4) {
             border-left: 2px solid #6c6767;
             border-right: 2px solid #6c6767;
         }
+
+        :not(:first-child) {
+            text-align: center;
+        }
+
+        /* :last-child {
+            text-align: center;
+        } */
     }
 `;
 

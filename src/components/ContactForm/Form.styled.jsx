@@ -4,12 +4,11 @@ import { Form } from 'formik';
 export const FormStyled = styled(Form)`
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    padding: ${p => p.theme.space[4]}px ${p => p.theme.space[3]}px;
+    
+    padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
     border: 1px solid black;
     height: 240px;
-    width: 280px;
+    width: 260px;
     border-radius: ${p => p.theme.radii[0]}px;
     background-color: #6a6767;
     color: #ffffff;
@@ -19,23 +18,34 @@ export const FormStyled = styled(Form)`
         height: 48px;
         /* margin-bottom: ${p => p.theme.space[3]}px;  */
         padding-bottom: ${p => p.theme.space[4]}px;       
-        
     }
 
     input {
         display: block;
-        width: 200px;
+        width: 100%;
+        margin-top: 8px;    
         border-radius: 5px;
+        border: 1px solid #bdbdbd;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;        
+
+        :focus {
+            color: #212529;
+            background-color: #fff;
+            border-color: #bdbdbd;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(213, 212, 212, 0.25);
+        }
         
     }
 
-    span {
+    span {        
         color: ${p => p.theme.colors.red};
     }
 
     button {
-        margin-top: ${p => p.theme.space[4]}px;
-        padding: 16px;
+        margin-top: ${p => p.theme.space[4]}px;        
+        width: 150px;
+        height: 50px;
         border-radius: ${p => p.theme.radii[0]}px;
         cursor: pointer;
         margin-left: auto;

@@ -1,10 +1,12 @@
 import { Component } from "react";
 import { createPortal } from "react-dom";
+import { AiOutlineClose } from "react-icons/ai";
 import PropTypes from 'prop-types';
+
 import { ModalStyled, ButtonCloseStyled } from "./Modal.styled";
 import { ContactForm } from "components/ContactForm/ContactForm";
 
-import { AiOutlineClose } from "react-icons/ai";
+
 
 const modalRoot = document.querySelector('#modal-root')
 
@@ -38,9 +40,9 @@ export class Modal extends Component {
             <ModalStyled onClick={this.handleBackDropClick}>
                 <div>
                     <ButtonCloseStyled type="button" onClick={() => this.props.onClose()}>
-                        <AiOutlineClose size={16}/>
-                    </ButtonCloseStyled>
-                    <ContactForm />                    
+                        <AiOutlineClose size={20}/>
+                    </ButtonCloseStyled>                    
+                    <ContactForm contactData={this.props.contactData} />
                 </div>                
             </ModalStyled>,
             modalRoot
@@ -50,4 +52,5 @@ export class Modal extends Component {
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
+    contactData: PropTypes.object.isRequired,
 }

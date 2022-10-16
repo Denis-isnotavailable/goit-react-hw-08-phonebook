@@ -1,8 +1,7 @@
-// import PropTypes from 'prop-types';
-
-import { useEffect } from "react";
+import FadeLoader from "react-spinners/FadeLoader";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilteredContacts } from "redux/contacts/selectors";
+import { selectError, selectFilteredContacts, selectOperation } from "redux/contacts/selectors";
 import { fetchContacts } from "redux/contacts/operations";
 
 import { ContainerStyled, ContactsNumber, BoxFilterFormButton } from "components/Container/Container.styled";
@@ -10,52 +9,43 @@ import { Filter } from "components/Filter/Filter";
 import { ContactList } from "components/ContactList/ContactList";
 import { ButtonOpenStyled } from "components/ContactForm/Form.styled";
 import { Modal } from "components/Modal/Modal";
-import { useState } from "react";
 
 
 const Container = () => {
     const dispatch = useDispatch();
     const contacts = useSelector(selectFilteredContacts);
+    const operation = useSelector(selectOperation);
+    const error = useSelector(selectError);
     const [ismodalOpen, setIsmodalOpen] = useState(false);
+    const [changingData, setChangingData] = useState({id: null, data: {name: "", number: ""}});
     
 
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
 
-    const closeModal = () => {
-      setIsmodalOpen(false);
+    const openChangingModal = contactData => {
+        setIsmodalOpen(true);
+        setChangingData(contactData);        
     }
-    
 
-    // const formSubmitHandler = data => {
-    //     const { name } = data;
-        
-    //     if (!contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
-    //     dispatch(addContact(data));      
-    //     } else {
-    //     alert(`${name} is already in contacts`);
-    //     } 
-    // }
+    const closeModal = () => {
+        setIsmodalOpen(false);
+        setChangingData({ id: null, data: { name: "", number: "" } });        
+    }
 
     return (
         <ContainerStyled>
             <ContactsNumber>contacts: {contacts.length}</ContactsNumber>
-            {ismodalOpen && <Modal onClose={closeModal}/>}
+            {ismodalOpen && <Modal
+                onClose={closeModal}                
+                contactData={changingData} />}
             <BoxFilterFormButton>
                 <Filter />
                 <ButtonOpenStyled type="button" onClick={() => setIsmodalOpen(true)} >+</ButtonOpenStyled>
-            </BoxFilterFormButton>
+            </BoxFilterFormButton> 
             
-
-            {/* <ContactForm onSubmit={formSubmitHandler} />        */}
-
-            
-
-            
-            <ContactList
-                // contacts={contacts}
-            />
+            {operation === "fetch" && !error ? <FadeLoader /> : <ContactList openModal={openChangingModal} /> }
         
         </ContainerStyled>);
 }
