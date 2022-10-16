@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerStyled = styled.section`
-    min-height: 80vh;
+    min-height: 90vh;
     border: 3px solid black;
     border-top: none;
 
