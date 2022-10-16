@@ -14,13 +14,10 @@ import { SignUpFormStyled } from "components/SignUp/SignUp.styled";
 const SignIn = () => {
     const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);    
-    const isAuthLoading = useSelector(selectIsAuthLoading); 
-
-    console.log(isAuthLoading);
+    const isAuthLoading = useSelector(selectIsAuthLoading);   
     
-    const handleSubmit = (values, { resetForm }) => {
-       
-        console.log(values);
+    const handleSubmit = (values, { resetForm }) => {       
+        // console.log(values);
         dispatch(login(values));
         resetForm();
     };
