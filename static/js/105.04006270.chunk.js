@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[105],{9105:function(e,t,n){n.r(t);var c=n(3037),o=n(184);t.default=function(){return(0,o.jsxs)(c.HomePageStyled,{children:[(0,o.jsx)("h1",{children:"Phonebook"}),(0,o.jsx)("img",{src:"https://cdn-icons-png.flaticon.com/512/3253/3253756.png",alt:"homepage",width:"450"})]})}}}]);
+//# sourceMappingURL=105.04006270.chunk.js.map
