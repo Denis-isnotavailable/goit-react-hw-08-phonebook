@@ -14,12 +14,12 @@ import { SignUpFormStyled } from "components/SignUp/SignUp.styled";
 const SignIn = () => {
     const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);    
-    const isAuthLoading = useSelector(selectIsAuthLoading);   
+    const isAuthLoading = useSelector(selectIsAuthLoading);
+    // const errorAuth = useSelector(selectAuthError);
     
-    const handleSubmit = (values, { resetForm }) => {       
+    const handleSubmit = (values, ) => {       
         // console.log(values);
-        dispatch(login(values));
-        resetForm();
+        dispatch(login(values));        
     };
 
     return (
@@ -39,7 +39,7 @@ const SignIn = () => {
                         <ErrorMessage name="password" component="span" />
                     </label>
 
-                    <button type="submit"> { !isAuthLoading ? <ScaleLoader color="#ffffff" height={25} /> : <>Log In</> } </button>
+                    <button type="submit"> { isAuthLoading ? <ScaleLoader color="#ffffff" height={25} /> : <>Log In</> } </button>
                 </SignUpFormStyled>
             </Formik > }
         </>
