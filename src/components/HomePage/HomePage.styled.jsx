@@ -6,7 +6,7 @@ export const HomePageStyled = styled.div`
         margin-top: 0;
         font-size: 80px;
         color: #accde3;
-    }    
+    }
     
     height: 80vh;
     padding: 32px;
@@ -14,4 +14,11 @@ export const HomePageStyled = styled.div`
     border-top: none;
 
     background-color: #6a6767;
+
+    // FOR PAGENOTFOUND
+
+    div {
+        color: #ffffff;
+        font-size: 32px;
+    }
 `;
